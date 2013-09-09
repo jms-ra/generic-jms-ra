@@ -335,7 +335,6 @@ public class JmsSessionFactoryImpl implements JmsSessionFactory, Referenceable {
                 JmsConnectionRequestInfo info = new JmsConnectionRequestInfo(transacted, acknowledgeMode, sessionType);
                 info.setUserName(userName);
                 info.setPassword(password);
-                info.setClientID(clientID);
                 info.setDefaults(mcf.getProperties());
 
                 if (trace)
