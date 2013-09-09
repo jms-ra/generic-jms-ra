@@ -33,9 +33,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-rar-plugin</artifactId>
-                <configuration>
-                    <raXmlFile>src/main/resources/ra.xml</raXmlFile>
-                </configuration>
             </plugin>
         </plugins>
     </build>

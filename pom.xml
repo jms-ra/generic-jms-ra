@@ -67,5 +67,6 @@
 
     <modules>
         <module>generic-jms-ra-jar</module>
+        <module>generic-jms-ra-rar</module>
     </modules>
 </project>
