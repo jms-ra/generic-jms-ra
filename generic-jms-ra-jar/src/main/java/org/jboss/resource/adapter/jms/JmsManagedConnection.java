@@ -653,28 +653,26 @@ public class JmsManagedConnection implements ManagedConnection, ExceptionListene
             }
 
             if (con instanceof XAConnection) {
-                if (mcf.getProperties().getType() == JmsConnectionFactory.AGNOSTIC) {
-                    xaSession = ((XAConnection) con).createXASession();
-                    session = xaSession.getSession();
-                } else if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
+                if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
                     xaSession = ((XAQueueConnection) con).createXAQueueSession();
                     session = ((XAQueueSession)xaSession).getQueueSession();
                 } else if (mcf.getProperties().getType() == JmsConnectionFactory.TOPIC) {
                     xaSession = ((XATopicConnection) con).createXATopicSession();
                     session = ((XATopicSession)xaSession).getTopicSession();
+                } else {
+                    xaSession = ((XAConnection) con).createXASession();
+                    session = xaSession.getSession();
                 }
 
                 xaTransacted = true;
             } else {
-                if (mcf.getProperties().getType() == JmsConnectionFactory.AGNOSTIC) {
-                    session = con.createSession(transacted, ack);
-                } else if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
+                if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
                     session = ((QueueConnection)con).createQueueSession(transacted, ack);
                 } else if (mcf.getProperties().getType() == JmsConnectionFactory.TOPIC) {
                     session = ((TopicConnection)con).createTopicSession(transacted, ack);
+                } else {
+                    session = con.createSession(transacted, ack);
                 }
-
-                session = con.createSession(transacted, ack);
                 if (trace) {
                     log.trace("Using a non-XA Connection.  " +
                             "It will not be able to participate in a Global UOW");
@@ -718,41 +716,41 @@ public class JmsManagedConnection implements ManagedConnection, ExceptionListene
             XAConnectionFactory qFactory = (XAConnectionFactory) factory;
 
             if (username != null) {
-                if (mcf.getProperties().getType() == JmsConnectionFactory.AGNOSTIC) {
-                    connection = qFactory.createXAConnection(username, password);
-                } else if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
+                if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
                     connection = ((XAQueueConnectionFactory)qFactory).createXAQueueConnection(username, password);
                 } else if (mcf.getProperties().getType() == JmsConnectionFactory.TOPIC) {
                     connection = ((XATopicConnectionFactory)qFactory).createXATopicConnection(username, password);
+                } else {
+                    connection = qFactory.createXAConnection(username, password);
                 }
             } else {
-               if (mcf.getProperties().getType() == JmsConnectionFactory.AGNOSTIC) {
-                   connection = qFactory.createXAConnection();
-               } else if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
-                   connection = ((XAQueueConnectionFactory)qFactory).createXAQueueConnection();
-               } else if (mcf.getProperties().getType() == JmsConnectionFactory.TOPIC) {
-                   connection = ((XATopicConnectionFactory)qFactory).createXATopicConnection();
-               }
+                if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
+                    connection = ((XAQueueConnectionFactory)qFactory).createXAQueueConnection();
+                } else if (mcf.getProperties().getType() == JmsConnectionFactory.TOPIC) {
+                    connection = ((XATopicConnectionFactory)qFactory).createXATopicConnection();
+                } else {
+                    connection = qFactory.createXAConnection();
+                }
             }
 
             log.debug("created XAConnection: " + connection);
         } else if (factory instanceof ConnectionFactory) {
             ConnectionFactory qFactory = (ConnectionFactory) factory;
             if (username != null) {
-                if (mcf.getProperties().getType() == JmsConnectionFactory.AGNOSTIC) {
-                    connection = qFactory.createConnection(username, password);
-                } else if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
+                if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
                     connection = ((QueueConnectionFactory)qFactory).createQueueConnection(username, password);
                 } else if (mcf.getProperties().getType() == JmsConnectionFactory.TOPIC) {
                     connection = ((TopicConnectionFactory)qFactory).createTopicConnection(username, password);
-              }
+                } else {
+                    connection = qFactory.createConnection(username, password);
+                }
             } else {
-               if (mcf.getProperties().getType() == JmsConnectionFactory.AGNOSTIC) {
-                   connection = qFactory.createConnection();
-               } else if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
+               if (mcf.getProperties().getType() == JmsConnectionFactory.QUEUE) {
                    connection = ((QueueConnectionFactory)qFactory).createQueueConnection();
                } else if (mcf.getProperties().getType() == JmsConnectionFactory.TOPIC) {
                    connection = ((TopicConnectionFactory)qFactory).createTopicConnection();
+               } else {
+                   connection = qFactory.createConnection();
                }
             }
 
