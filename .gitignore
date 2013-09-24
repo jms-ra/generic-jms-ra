@@ -1,3 +1,13 @@
 */target
 *.iml
+target
+*/.gitignore
+.gitkeep
 .idea
+*.ipr
+*.iws
+*.iml
+.classpath
+.project
+.settings
+.metadata
