@@ -25,6 +25,7 @@ import javax.jms.Destination;
 import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.Topic;
+import javax.naming.InitialContext;
 import javax.resource.ResourceException;
 import javax.resource.spi.ActivationSpec;
 import javax.resource.spi.InvalidPropertyException;
@@ -131,6 +132,16 @@ public class JmsActivationSpec implements ActivationSpec {
 
     private String connectionFactory;
 
+    /*
+     * Jndi Location for a resource adapter admin object contains default values for an activation specfication.
+     */
+    private String jndiJmsActivationSpecDefaultsAdminObject;
+    
+    /*
+     * An admin object contains default values for an activation specfication. This object is looked up using jndiJmsActivationSpecDefaultsAdminObject.
+     */
+    private JmsActivationSpecDefaultsAdminObject jmsActivationSpecDefaultsAdminObject;
+    
     public void setForceClearOnShutdown(boolean forceClear) {
         this.forceClearOnShutdown = forceClear;
     }
@@ -314,6 +325,12 @@ public class JmsActivationSpec implements ActivationSpec {
      * @return the user.
      */
     public String getUser() {
+    	if (user == null 
+    			&& jmsActivationSpecDefaultsAdminObject != null 
+    			&& jmsActivationSpecDefaultsAdminObject.getUser() != null) 
+    	{
+    		return jmsActivationSpecDefaultsAdminObject.getUser();
+    	}
         return user;
     }
 
@@ -328,6 +345,12 @@ public class JmsActivationSpec implements ActivationSpec {
      * @return the password.
      */
     public String getPassword() {
+    	if (pass == null 
+    			&& jmsActivationSpecDefaultsAdminObject != null 
+    			&& jmsActivationSpecDefaultsAdminObject.getPassword() != null) 
+    	{
+    		return jmsActivationSpecDefaultsAdminObject.getPassword();
+    	}
         return pass;
     }
 
@@ -451,6 +474,14 @@ public class JmsActivationSpec implements ActivationSpec {
         buffer.append(" maxSession=").append(maxSession);
         buffer.append(" connectionFactory=").append(connectionFactory);
         buffer.append(" jndiParameters=").append(jndiParameters);
+        buffer.append(" jndiJmsActivationSpecDefaultsAdminObject=").append(jndiJmsActivationSpecDefaultsAdminObject);
+        if (jmsActivationSpecDefaultsAdminObject != null) {
+            buffer.append(" jmsActivationSpecDefaultsAdminObject.jndiParameters=").append(jmsActivationSpecDefaultsAdminObject.getJndiParameters());
+            buffer.append(" jmsActivationSpecDefaultsAdminObject.user=").append(jmsActivationSpecDefaultsAdminObject.getUser());
+            if (jmsActivationSpecDefaultsAdminObject.getPassword() != null) {
+            	buffer.append(" jmsActivationSpecDefaultsAdminObject.password=").append("<not shown>");
+            }
+        }
         buffer.append(')');
         return buffer.toString();
     }
@@ -476,6 +507,12 @@ public class JmsActivationSpec implements ActivationSpec {
     }
 
     public String getJndiParameters() {
+    	if (jndiParameters == null 
+    			&& jmsActivationSpecDefaultsAdminObject != null 
+    			&& jmsActivationSpecDefaultsAdminObject.getJndiParameters() != null) 
+    	{
+    		return jmsActivationSpecDefaultsAdminObject.getJndiParameters();
+    	}
         return jndiParameters;
     }
 
@@ -486,4 +523,20 @@ public class JmsActivationSpec implements ActivationSpec {
     public String getConnectionFactory() {
         return connectionFactory;
     }
+    
+    public String getJndiJmsActivationSpecDefaultsAdminObject() {
+		return jndiJmsActivationSpecDefaultsAdminObject;
+	}
+
+	public void setJndiJmsActivationSpecDefaultsAdminObject(
+			String jndiJmsActivationSpecDefaultsAdminObject) {
+		this.jndiJmsActivationSpecDefaultsAdminObject = jndiJmsActivationSpecDefaultsAdminObject;
+		
+		try {
+			jmsActivationSpecDefaultsAdminObject = (JmsActivationSpecDefaultsAdminObject) new InitialContext().lookup(jndiJmsActivationSpecDefaultsAdminObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

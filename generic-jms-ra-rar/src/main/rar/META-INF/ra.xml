@@ -125,5 +125,38 @@
             </messageadapter>
         </inbound-resourceadapter>
 
+
+		<adminobject>
+            <adminobject-interface>org.jboss.resource.adapter.jms.inflow.JmsActivationSpecDefaultsAdminObject</adminobject-interface>
+            <adminobject-class>
+                org.jboss.resource.adapter.jms.inflow.JmsActivationSpecDefaultsAdminObject
+            </adminobject-class>
+            <config-property>
+                <config-property-name>
+                    jndiParameters
+                </config-property-name>
+                <config-property-type>
+                    java.lang.String
+                </config-property-type>
+            </config-property>
+            <config-property>
+                <config-property-name>
+                    user
+                </config-property-name>
+                <config-property-type>
+                    java.lang.String
+                </config-property-type>
+            </config-property>
+            <config-property>
+                <config-property-name>
+                    password
+                </config-property-name>
+                <config-property-type>
+                    java.lang.String
+                </config-property-type>
+            </config-property>
+        </adminobject>
+
+
     </resourceadapter>
 </connector>
