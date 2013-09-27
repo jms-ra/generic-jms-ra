@@ -334,6 +334,43 @@ This information was provided by community members as I don't have access to a T
 
 Notice the "JndiParameters" are Tibco specific.
 
+### Example AS7 deployment descriptor for an annotation based MDB
+
+	<subsystem xmlns="urn:jboss:domain:resource-adapters:1.0">
+	    <resource-adapters>
+	        <resource-adapter>
+	            <archive>
+	                generic-jms-ra-<VERSION>.rar
+	            </archive>
+	            <transaction-support>NoTransaction</transaction-support>
+				<admin-objects>
+	                <admin-object class-name="org.jboss.resource.adapter.jms.inflow.JmsActivationSpecDefaultsAdminObject" jndi-name="java:jboss/ra/example/jmsActivationSpecDefaultsAdminObject" enabled="true" use-java-context="false" pool-name="jmsActivationSpecDefaultsAdminObject">
+	                    <config-property name="jndiParameters">
+	                        java.naming.factory.initial=com.tibco.tibjms.naming.TibjmsInitialContextFactory;java.naming.provider.url=tcp://TIBCO_HOST:7222
+	                    </config-property>
+	                    <config-property name="user">
+	                        user
+	                    </config-property>
+	                    <config-property name="password">
+	                        password
+	                    </config-property>
+	                </admin-object>
+	            </admin-objects>
+	        </resource-adapter>
+	    </resource-adapters>
+	</subsystem>
+
+Notice the "JndiParameters" are Tibco specific.
+
+	@MessageDriven( name = "ConsumeMDB", activationConfig = {
+		@ActivationConfigProperty(propertyName = "jndiJmsActivationSpecDefaultsAdminObject", propertyValue = "java:jboss/ra/example/jmsActivationSpecDefaultsAdminObject"),
+		@ActivationConfigProperty(propertyName = "connectionFactory", propertyValue = "QueueConnectionFactory"),
+		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
+		@ActivationConfigProperty(propertyName = "destination", propertyValue = "example.queue"),
+	})
+	@ResourceAdapter("generic-jms-ra-<VERSION>.rar")
+	public class ExampleMDB implements MessageListener
+
 ## SonicMQ Integration
 
 This was provided from the community.
@@ -423,6 +460,7 @@ This was provided from the community.
 * <strong>password</strong> - the password used when connecting to the JMS provider
 * <strong>minSession</strong> - the minimum number of JMS sessions to create; default is 1
 * <strong>maxSession</strong> - the maximum number of JMS sessions to create; default is 15
+* <strong>jndiJmsActivationSpecDefaultsAdminObject</strong> - jndi Location for a resource adapter admin object contains default values for an activation specfication. Values from this object will be used if the activation specifications setting for the corresponding value is null. This can be used to set environment specific runtime values for annotation based MDBs.
 
 ### Rarely used activation configuration properties
 * <strong>maxMessages</strong> - the value passed to `javax.jms.ConnectionConsumer.createConnectionConsumer(..)`; see section 8.2.4 of the JMS 1.1 specification for further details; default is 1
@@ -439,3 +477,11 @@ This was provided from the community.
 * <strong>Password</strong> - the password used when connecting to the JMS provider
 * <strong>ClientID</strong> - the client ID to set on the connection (e.g. for a topic subscription)
 * <strong>SessionDefaultType</strong> - set this to match the kind of session your application needs; valid values are "javax.jms.Topic" (set this if you are using `javax.jms.TopicConnection.createTopicSession()`) and "javax.jms.Queue" (set this if you are using `javax.jms.QueueConnection.createQueueSession()`); do not set if you are using `javax.jms.Session.createSession()`
+
+## Configuration for Admin Object (JmsActivationSpecDefaultsAdminObject)
+
+Defines default values that can be used for an activation specification. This can be used to set environment specific runtime values for annotation based MDBs. The MDB must refer to the admin objects jndi location using activation configuration property jndiJmsActivationSpecDefaultsAdminObject.
+
+* <strong>jndiParameters</strong> - the JNDI parameters used to perform the lookup of the destination and the connectionFactory.
+* <strong>user</strong> - the name of the user used when connecting to the JMS provider
+* <strong>password</strong> - the password used when connecting to the JMS provider
