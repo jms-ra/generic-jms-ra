@@ -231,8 +231,6 @@ public class JmsConnectionFactoryImpl implements JmsConnectionFactory, Reference
         s.setUserName(userName);
         s.setPassword(password);
 
-        System.out.println("sessionMode = " + sessionMode);
-
         try {
             JmsSession session = s.allocateConnection(sessionMode == Session.SESSION_TRANSACTED, sessionMode, AGNOSTIC);
             return new GenericJmsContext(s, session);
