@@ -73,4 +73,14 @@
         </plugins>
     </build>
 
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <modules>
+                <module>generic-jakarta-messaging-ra-rar</module>
+            </modules>
+        </profile>
+    </profiles>
+
 </project>
