@@ -48,12 +48,12 @@
             <dependency>
                 <groupId>org.jboss.logging</groupId>
                 <artifactId>jboss-logging</artifactId>
-                <version>3.4.2.Final</version>
+                <version>3.5.0.Final</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.logmanager</groupId>
                 <artifactId>jboss-logmanager</artifactId>
-                <version>2.1.18.Final</version>
+                <version>2.1.19.Final</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.spec.javax.jms</groupId>
@@ -68,7 +68,7 @@
             <dependency>
                 <groupId>org.jboss.spec.javax.resource</groupId>
                 <artifactId>jboss-connector-api_1.7_spec</artifactId>
-                <version>1.0.1.Final</version>
+                <version>2.0.0.Final-redhat-00001</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

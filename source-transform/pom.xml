@@ -36,7 +36,7 @@
         <transformer-input-dir>${project.basedir}</transformer-input-dir>
         <!-- Plugin dependency versions -->
         <version.org.eclipse.transformer>0.2.0</version.org.eclipse.transformer>
-        <version.batavia>1.0.10.Final</version.batavia>
+        <version.batavia>1.0.15.Final</version.batavia>
     </properties>
 
     <modules>
