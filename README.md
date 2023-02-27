@@ -263,7 +263,7 @@ This information was provided by community members as I don't have access to a T
 
 ### Example AS7 deployment descriptor for an outbound connector
 
-	<subsystem xmlns="urn:jboss:domain:resource-adapters:1.0">
+	<subsystem xmlns="urn:jboss:domain:resource-adapters:6.0">
 	    <resource-adapters>
 	        <resource-adapter>
 	            <archive>
