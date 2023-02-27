@@ -24,7 +24,7 @@
     <name>JBoss Generic JMS RA POM</name>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.genericjms</groupId>
-    <version>3.0.0.Beta1-SNAPSHOT</version>
+    <version>3.0.0.Beta1</version>
 
     <parent>
         <groupId>org.jboss</groupId>
@@ -46,7 +46,7 @@
         <connection>scm:git:git@github.com:jms-ra/generic-jms-ra.git</connection>
         <developerConnection>scm:git:git@github.com:jms-ra/generic-jms-ra.git</developerConnection>
         <url>https://github.com/jms-ra/generic-jms-ra</url>
-        <tag>HEAD</tag>
+        <tag>generic-jms-ra-pom-3.0.0.Beta1</tag>
     </scm>
 
     <!-- Compile Dependencies -->
