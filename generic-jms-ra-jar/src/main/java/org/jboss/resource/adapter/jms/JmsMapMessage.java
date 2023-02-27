@@ -23,8 +23,8 @@ package org.jboss.resource.adapter.jms;
 
 import java.util.Enumeration;
 
-import javax.jms.JMSException;
-import javax.jms.MapMessage;
+import jakarta.jms.JMSException;
+import jakarta.jms.MapMessage;
 
 /**
  * A wrapper for a message

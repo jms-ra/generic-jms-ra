@@ -8,7 +8,7 @@ package org.jboss.resource.adapter.jms.util;
 import java.security.AccessController;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
-import javax.jms.JMSException;
+import jakarta.jms.JMSException;
 import static org.jboss.resource.adapter.jms.util.TibcojmsUtils.JMS_PRODUCER_CLASSNAME;
 import static org.jboss.resource.adapter.jms.util.TibcojmsUtils.closeProducer;
 

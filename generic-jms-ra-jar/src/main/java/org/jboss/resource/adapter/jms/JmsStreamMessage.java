@@ -21,8 +21,8 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.jms.JMSException;
-import javax.jms.StreamMessage;
+import jakarta.jms.JMSException;
+import jakarta.jms.StreamMessage;
 
 /**
  * A wrapper for a message

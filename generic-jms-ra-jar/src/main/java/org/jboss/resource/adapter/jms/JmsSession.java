@@ -25,34 +25,34 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import javax.jms.BytesMessage;
-import javax.jms.Destination;
-import javax.jms.IllegalStateException;
-import javax.jms.InvalidDestinationException;
-import javax.jms.JMSContext;
-import javax.jms.JMSException;
-import javax.jms.JMSRuntimeException;
-import javax.jms.MapMessage;
-import javax.jms.Message;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageListener;
-import javax.jms.MessageProducer;
-import javax.jms.ObjectMessage;
-import javax.jms.Queue;
-import javax.jms.QueueBrowser;
-import javax.jms.QueueReceiver;
-import javax.jms.QueueSender;
-import javax.jms.QueueSession;
-import javax.jms.Session;
-import javax.jms.StreamMessage;
-import javax.jms.TemporaryQueue;
-import javax.jms.TemporaryTopic;
-import javax.jms.TextMessage;
-import javax.jms.Topic;
-import javax.jms.TopicPublisher;
-import javax.jms.TopicSession;
-import javax.jms.TopicSubscriber;
-import javax.resource.spi.ConnectionEvent;
+import jakarta.jms.BytesMessage;
+import jakarta.jms.Destination;
+import jakarta.jms.IllegalStateException;
+import jakarta.jms.InvalidDestinationException;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
+import jakarta.jms.JMSRuntimeException;
+import jakarta.jms.MapMessage;
+import jakarta.jms.Message;
+import jakarta.jms.MessageConsumer;
+import jakarta.jms.MessageListener;
+import jakarta.jms.MessageProducer;
+import jakarta.jms.ObjectMessage;
+import jakarta.jms.Queue;
+import jakarta.jms.QueueBrowser;
+import jakarta.jms.QueueReceiver;
+import jakarta.jms.QueueSender;
+import jakarta.jms.QueueSession;
+import jakarta.jms.Session;
+import jakarta.jms.StreamMessage;
+import jakarta.jms.TemporaryQueue;
+import jakarta.jms.TemporaryTopic;
+import jakarta.jms.TextMessage;
+import jakarta.jms.Topic;
+import jakarta.jms.TopicPublisher;
+import jakarta.jms.TopicSession;
+import jakarta.jms.TopicSubscriber;
+import jakarta.resource.spi.ConnectionEvent;
 
 import org.jboss.logging.Logger;
 
@@ -353,7 +353,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     @Override
     public Topic createTopic(String topicName) throws JMSException {
         if (info.getType() == JmsConnectionFactory.QUEUE) {
-            throw new IllegalStateException("Cannot create topic for javax.jms.QueueSession");
+            throw new IllegalStateException("Cannot create topic for jakarta.jms.QueueSession");
         }
 
         Session session = getSession();
@@ -410,7 +410,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     @Override
     public TopicSubscriber createDurableSubscriber(Topic topic, String name) throws JMSException {
         if (info.getType() == JmsConnectionFactory.QUEUE) {
-            throw new IllegalStateException("Cannot create durable subscriber from javax.jms.QueueSession");
+            throw new IllegalStateException("Cannot create durable subscriber from jakarta.jms.QueueSession");
         }
 
         lock();
@@ -473,7 +473,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     @Override
     public TemporaryTopic createTemporaryTopic() throws JMSException {
         if (info.getType() == JmsConnectionFactory.QUEUE) {
-            throw new IllegalStateException("Cannot create temporary topic for javax.jms.QueueSession");
+            throw new IllegalStateException("Cannot create temporary topic for jakarta.jms.QueueSession");
         }
 
         lock();
@@ -496,7 +496,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     @Override
     public void unsubscribe(String name) throws JMSException {
         if (info.getType() == JmsConnectionFactory.QUEUE) {
-            throw new IllegalStateException("Cannot unsubscribe for javax.jms.QueueSession");
+            throw new IllegalStateException("Cannot unsubscribe for jakarta.jms.QueueSession");
         }
 
         lock();
@@ -516,7 +516,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     public QueueBrowser createBrowser(Queue queue) throws JMSException {
 
         if (info.getType() == JmsConnectionFactory.TOPIC) {
-            throw new IllegalStateException("Cannot create browser for javax.jms.TopicSession");
+            throw new IllegalStateException("Cannot create browser for jakarta.jms.TopicSession");
 
         }
 
@@ -545,7 +545,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
 
     public Queue createQueue(String queueName) throws JMSException {
         if (info.getType() == JmsConnectionFactory.TOPIC) {
-            throw new IllegalStateException("Cannot create browser or javax.jms.TopicSession");
+            throw new IllegalStateException("Cannot create browser or jakarta.jms.TopicSession");
 
         }
 
@@ -621,7 +621,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
 
     public TemporaryQueue createTemporaryQueue() throws JMSException {
         if (info.getType() == JmsConnectionFactory.TOPIC) {
-            throw new IllegalStateException("Cannot create temporary queue for javax.jms.TopicSession");
+            throw new IllegalStateException("Cannot create temporary queue for jakarta.jms.TopicSession");
 
         }
 
@@ -732,7 +732,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     @Override
     public MessageConsumer createSharedConsumer(Topic topic, String sharedSubscriptionName) throws JMSException {
         if (info.getType() == JmsConnectionFactory.QUEUE) {
-            throw new IllegalStateException("Cannot create shared consumer for javax.jms.QueueSession");
+            throw new IllegalStateException("Cannot create shared consumer for jakarta.jms.QueueSession");
         }
         lock();
         try {
@@ -755,7 +755,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     @Override
     public MessageConsumer createSharedConsumer(Topic topic, String sharedSubscriptionName, String messageSelector) throws JMSException {
         if (info.getType() == JmsConnectionFactory.QUEUE) {
-            throw new IllegalStateException("Cannot create shared consumer for javax.jms.QueueSession");
+            throw new IllegalStateException("Cannot create shared consumer for jakarta.jms.QueueSession");
         }
         lock();
         try {
@@ -778,7 +778,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     @Override
     public MessageConsumer createDurableConsumer(Topic topic, String name) throws JMSException {
         if (info.getType() == JmsConnectionFactory.QUEUE) {
-            throw new IllegalStateException("Cannot create durable consumer for javax.jms.QueueSession");
+            throw new IllegalStateException("Cannot create durable consumer for jakarta.jms.QueueSession");
         }
         lock();
         try {
@@ -801,7 +801,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     @Override
     public MessageConsumer createDurableConsumer(Topic topic, String name, String messageSelector, boolean noLocal) throws JMSException {
         if (info.getType() == JmsConnectionFactory.QUEUE) {
-            throw new IllegalStateException("Cannot create durable consumer for javax.jms.QueueSession");
+            throw new IllegalStateException("Cannot create durable consumer for jakarta.jms.QueueSession");
         }
         lock();
         try {
@@ -824,7 +824,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     @Override
     public MessageConsumer createSharedDurableConsumer(Topic topic, String name) throws JMSException {
         if (info.getType() == JmsConnectionFactory.QUEUE) {
-            throw new IllegalStateException("Cannot create shared consumer for javax.jms.QueueSession");
+            throw new IllegalStateException("Cannot create shared consumer for jakarta.jms.QueueSession");
         }
         lock();
         try {
@@ -847,7 +847,7 @@ public class JmsSession implements Session, QueueSession, TopicSession {
     @Override
     public MessageConsumer createSharedDurableConsumer(Topic topic, String name, String messageSelector) throws JMSException {
         if (info.getType() == JmsConnectionFactory.QUEUE) {
-            throw new IllegalStateException("Cannot create shared consumer for javax.jms.QueueSession");
+            throw new IllegalStateException("Cannot create shared consumer for jakarta.jms.QueueSession");
         }
         lock();
         try {

@@ -21,9 +21,9 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.jms.JMSException;
-import javax.jms.Queue;
-import javax.jms.QueueReceiver;
+import jakarta.jms.JMSException;
+import jakarta.jms.Queue;
+import jakarta.jms.QueueReceiver;
 
 /**
  * A wrapper for a queue receiver

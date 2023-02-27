@@ -23,8 +23,8 @@ package org.jboss.resource.adapter.jms;
 
 import java.io.Serializable;
 
-import javax.jms.JMSException;
-import javax.jms.ObjectMessage;
+import jakarta.jms.JMSException;
+import jakarta.jms.ObjectMessage;
 
 /**
  * A wrapper for a message

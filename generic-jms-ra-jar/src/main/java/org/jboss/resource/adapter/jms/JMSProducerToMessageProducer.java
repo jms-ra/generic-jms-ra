@@ -16,13 +16,13 @@
 package org.jboss.resource.adapter.jms;
 
 import java.security.PrivilegedActionException;
-import javax.jms.CompletionListener;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.JMSProducer;
-import javax.jms.JMSRuntimeException;
-import javax.jms.Message;
-import javax.jms.MessageProducer;
+import jakarta.jms.CompletionListener;
+import jakarta.jms.Destination;
+import jakarta.jms.JMSException;
+import jakarta.jms.JMSProducer;
+import jakarta.jms.JMSRuntimeException;
+import jakarta.jms.Message;
+import jakarta.jms.MessageProducer;
 import org.jboss.resource.adapter.jms.util.JMSProducerUtils;
 
 /**

@@ -21,10 +21,10 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.Queue;
-import javax.jms.QueueSender;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.Queue;
+import jakarta.jms.QueueSender;
 
 import org.jboss.logging.Logger;
 

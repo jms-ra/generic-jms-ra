@@ -21,19 +21,19 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.jms.Connection;
-import javax.jms.JMSContext;
-import javax.jms.JMSException;
-import javax.jms.JMSRuntimeException;
-import javax.jms.JMSSecurityException;
-import javax.jms.JMSSecurityRuntimeException;
-import javax.jms.QueueConnection;
-import javax.jms.Session;
-import javax.jms.TopicConnection;
+import jakarta.jms.Connection;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
+import jakarta.jms.JMSRuntimeException;
+import jakarta.jms.JMSSecurityException;
+import jakarta.jms.JMSSecurityRuntimeException;
+import jakarta.jms.QueueConnection;
+import jakarta.jms.Session;
+import jakarta.jms.TopicConnection;
 import javax.naming.Reference;
-import javax.resource.Referenceable;
-import javax.resource.spi.ConnectionManager;
-import javax.resource.spi.ManagedConnectionFactory;
+import jakarta.resource.Referenceable;
+import jakarta.resource.spi.ConnectionManager;
+import jakarta.resource.spi.ManagedConnectionFactory;
 
 import org.jboss.logging.Logger;
 import org.jboss.resource.adapter.jms.util.Strings;

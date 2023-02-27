@@ -21,9 +21,9 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.jms.JMSException;
-import javax.jms.Topic;
-import javax.jms.TopicSubscriber;
+import jakarta.jms.JMSException;
+import jakarta.jms.Topic;
+import jakarta.jms.TopicSubscriber;
 
 /**
  * A wrapper for a topic subscriber

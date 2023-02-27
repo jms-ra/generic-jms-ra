@@ -31,38 +31,38 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.ExceptionListener;
-import javax.jms.JMSContext;
-import javax.jms.JMSException;
-import javax.jms.QueueConnection;
-import javax.jms.QueueConnectionFactory;
-import javax.jms.ResourceAllocationException;
-import javax.jms.Session;
-import javax.jms.TopicConnection;
-import javax.jms.TopicConnectionFactory;
-import javax.jms.XAConnection;
-import javax.jms.XAConnectionFactory;
-import javax.jms.XAJMSContext;
-import javax.jms.XAQueueConnection;
-import javax.jms.XAQueueConnectionFactory;
-import javax.jms.XAQueueSession;
-import javax.jms.XASession;
-import javax.jms.XATopicConnection;
-import javax.jms.XATopicConnectionFactory;
-import javax.jms.XATopicSession;
+import jakarta.jms.Connection;
+import jakarta.jms.ConnectionFactory;
+import jakarta.jms.ExceptionListener;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
+import jakarta.jms.QueueConnection;
+import jakarta.jms.QueueConnectionFactory;
+import jakarta.jms.ResourceAllocationException;
+import jakarta.jms.Session;
+import jakarta.jms.TopicConnection;
+import jakarta.jms.TopicConnectionFactory;
+import jakarta.jms.XAConnection;
+import jakarta.jms.XAConnectionFactory;
+import jakarta.jms.XAJMSContext;
+import jakarta.jms.XAQueueConnection;
+import jakarta.jms.XAQueueConnectionFactory;
+import jakarta.jms.XAQueueSession;
+import jakarta.jms.XASession;
+import jakarta.jms.XATopicConnection;
+import jakarta.jms.XATopicConnectionFactory;
+import jakarta.jms.XATopicSession;
 import javax.naming.Context;
 import javax.naming.NamingException;
-import javax.resource.ResourceException;
-import javax.resource.spi.ConnectionEvent;
-import javax.resource.spi.ConnectionEventListener;
-import javax.resource.spi.ConnectionRequestInfo;
-import javax.resource.spi.IllegalStateException;
-import javax.resource.spi.LocalTransaction;
-import javax.resource.spi.ManagedConnection;
-import javax.resource.spi.ManagedConnectionMetaData;
-import javax.resource.spi.SecurityException;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.ConnectionEvent;
+import jakarta.resource.spi.ConnectionEventListener;
+import jakarta.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.IllegalStateException;
+import jakarta.resource.spi.LocalTransaction;
+import jakarta.resource.spi.ManagedConnection;
+import jakarta.resource.spi.ManagedConnectionMetaData;
+import jakarta.resource.spi.SecurityException;
 import javax.security.auth.Subject;
 import javax.transaction.xa.XAResource;
 
@@ -339,7 +339,7 @@ public class JmsManagedConnection implements ManagedConnection, ExceptionListene
      *
      * FIXME
      *
-     * @throws javax.resource.ResourceException
+     * @throws jakarta.resource.ResourceException
      */
     @Override
     public void cleanup() throws ResourceException {
@@ -535,7 +535,7 @@ public class JmsManagedConnection implements ManagedConnection, ExceptionListene
      * Get the log writer for this connection.
      *
      * @return Always null
-     * @throws javax.resource.ResourceException
+     * @throws jakarta.resource.ResourceException
      */
     @Override
     public PrintWriter getLogWriter() throws ResourceException {

@@ -21,11 +21,11 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.jms.Destination;
-import javax.jms.JMSContext;
-import javax.jms.Queue;
-import javax.jms.Topic;
-import javax.resource.ResourceException;
+import jakarta.jms.Destination;
+import jakarta.jms.JMSContext;
+import jakarta.jms.Queue;
+import jakarta.jms.Topic;
+import jakarta.resource.ResourceException;
 
 import org.jboss.resource.adapter.jms.util.Strings;
 
@@ -130,7 +130,7 @@ public class JmsMCFProperties implements java.io.Serializable {
     /**
      * Helper method to set the default session type.
      *
-     * @param type either javax.jms.Topic or javax.jms.Queue
+     * @param type either jakarta.jms.Topic or jakarta.jms.Queue
      * @throws ResourceException if type was not a valid type.
      */
     public void setSessionDefaultType(String type) throws ResourceException {

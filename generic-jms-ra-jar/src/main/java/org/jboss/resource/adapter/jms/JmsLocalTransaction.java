@@ -21,9 +21,9 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.jms.JMSException;
-import javax.resource.ResourceException;
-import javax.resource.spi.LocalTransaction;
+import jakarta.jms.JMSException;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.LocalTransaction;
 
 /**
  * JMS Local transaction

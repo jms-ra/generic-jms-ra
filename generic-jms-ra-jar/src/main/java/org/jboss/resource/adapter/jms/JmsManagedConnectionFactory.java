@@ -25,12 +25,12 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.jms.ConnectionMetaData;
-import javax.resource.ResourceException;
-import javax.resource.spi.ConnectionManager;
-import javax.resource.spi.ConnectionRequestInfo;
-import javax.resource.spi.ManagedConnection;
-import javax.resource.spi.ManagedConnectionFactory;
+import jakarta.jms.ConnectionMetaData;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.ConnectionManager;
+import jakarta.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.ManagedConnection;
+import jakarta.resource.spi.ManagedConnectionFactory;
 import javax.security.auth.Subject;
 
 import org.jboss.logging.Logger;
@@ -78,7 +78,7 @@ public class JmsManagedConnectionFactory implements ManagedConnectionFactory {
 
     /**
      * Create a "non managed" connection factory.No appserver involved
-     * @throws javax.resource.ResourceException
+     * @throws jakarta.resource.ResourceException
      */
     @Override
     public Object createConnectionFactory() throws ResourceException {
@@ -87,7 +87,7 @@ public class JmsManagedConnectionFactory implements ManagedConnectionFactory {
 
     /**
      * Create a ConnectionFactory with appserver hook
-     * @throws javax.resource.ResourceException
+     * @throws jakarta.resource.ResourceException
      */
     @Override
     public Object createConnectionFactory(ConnectionManager cxManager) throws ResourceException {
@@ -103,7 +103,7 @@ public class JmsManagedConnectionFactory implements ManagedConnectionFactory {
     /**
      * Create a new connection to manage in pool
      * @param info
-     * @throws javax.resource.ResourceException
+     * @throws jakarta.resource.ResourceException
      */
     @Override
     public ManagedConnection createManagedConnection(Subject subject, ConnectionRequestInfo info) throws ResourceException {
@@ -132,7 +132,7 @@ public class JmsManagedConnectionFactory implements ManagedConnectionFactory {
     /**
      * Match a set of connections from the pool
      * @param info
-     * @throws javax.resource.ResourceException
+     * @throws jakarta.resource.ResourceException
      */
     @Override
     public ManagedConnection matchManagedConnections(Set connectionSet, Subject subject, ConnectionRequestInfo info) throws ResourceException {
@@ -304,7 +304,7 @@ public class JmsManagedConnectionFactory implements ManagedConnectionFactory {
     /**
      * Set the default session typ
      *
-     * @param type either javax.jms.Topic or javax.jms.Queue
+     * @param type either jakarta.jms.Topic or jakarta.jms.Queue
      * @throws ResourceException if type was not a valid type.
      */
     public void setSessionDefaultType(String type) throws ResourceException {

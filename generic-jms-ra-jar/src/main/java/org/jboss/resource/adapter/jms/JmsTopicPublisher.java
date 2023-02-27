@@ -23,10 +23,10 @@ package org.jboss.resource.adapter.jms;
 
 import org.jboss.logging.Logger;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.Topic;
-import javax.jms.TopicPublisher;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.Topic;
+import jakarta.jms.TopicPublisher;
 
 /**
  * JmsQueueSender.

@@ -21,9 +21,9 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.ConnectionRequestInfo;
 
-import javax.jms.Session;
+import jakarta.jms.Session;
 
 import org.jboss.resource.adapter.jms.util.Strings;
 

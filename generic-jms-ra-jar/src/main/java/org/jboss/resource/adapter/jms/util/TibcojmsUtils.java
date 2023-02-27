@@ -25,7 +25,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-import javax.jms.JMSException;
+import jakarta.jms.JMSException;
 import org.jboss.logging.Logger;
 
 /**

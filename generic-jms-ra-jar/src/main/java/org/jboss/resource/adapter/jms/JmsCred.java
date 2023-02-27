@@ -28,11 +28,11 @@ import java.security.PrivilegedAction;
 
 import javax.security.auth.Subject;
 
-import javax.resource.spi.ManagedConnectionFactory;
-import javax.resource.spi.SecurityException;
-import javax.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.ManagedConnectionFactory;
+import jakarta.resource.spi.SecurityException;
+import jakarta.resource.spi.ConnectionRequestInfo;
 
-import javax.resource.spi.security.PasswordCredential;
+import jakarta.resource.spi.security.PasswordCredential;
 
 /**
  * Credential information

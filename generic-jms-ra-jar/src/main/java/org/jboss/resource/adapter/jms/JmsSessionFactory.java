@@ -21,12 +21,12 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.jms.Connection;
-import javax.jms.JMSException;
-import javax.jms.QueueConnection;
-import javax.jms.TemporaryQueue;
-import javax.jms.TemporaryTopic;
-import javax.jms.TopicConnection;
+import jakarta.jms.Connection;
+import jakarta.jms.JMSException;
+import jakarta.jms.QueueConnection;
+import jakarta.jms.TemporaryQueue;
+import jakarta.jms.TemporaryTopic;
+import jakarta.jms.TopicConnection;
 
 /**
  * A marker interface to join topics and queues into one factory.

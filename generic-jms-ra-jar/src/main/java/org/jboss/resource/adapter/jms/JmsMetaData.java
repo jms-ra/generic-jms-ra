@@ -21,8 +21,8 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.resource.ResourceException;
-import javax.resource.spi.ManagedConnectionMetaData;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.ManagedConnectionMetaData;
 
 /**
  * Jms Metadata

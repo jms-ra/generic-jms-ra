@@ -23,9 +23,9 @@ package org.jboss.resource.adapter.jms;
 
 import java.io.Serializable;
 
-import javax.jms.ConnectionFactory;
-import javax.jms.QueueConnectionFactory;
-import javax.jms.TopicConnectionFactory;
+import jakarta.jms.ConnectionFactory;
+import jakarta.jms.QueueConnectionFactory;
+import jakarta.jms.TopicConnectionFactory;
 
 /**
  * An aggregate interface for QueueConnectionFactory and

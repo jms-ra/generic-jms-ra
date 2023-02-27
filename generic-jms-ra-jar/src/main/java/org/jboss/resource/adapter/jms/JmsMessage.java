@@ -23,9 +23,9 @@ package org.jboss.resource.adapter.jms;
 
 import java.util.Enumeration;
 
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.Message;
+import jakarta.jms.Destination;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
 
 /**
  * A wrapper for a message

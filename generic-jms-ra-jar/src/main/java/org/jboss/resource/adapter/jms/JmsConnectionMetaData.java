@@ -24,10 +24,10 @@ package org.jboss.resource.adapter.jms;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import javax.jms.ConnectionMetaData;
+import jakarta.jms.ConnectionMetaData;
 
 /**
- * This class implements javax.jms.ConnectionMetaData
+ * This class implements jakarta.jms.ConnectionMetaData
  *
  * @author Norbert Lataille (Norbert.Lataille@m4x.org)
  * @author Hiram Chirino (Norbert.Lataille@m4x.org)

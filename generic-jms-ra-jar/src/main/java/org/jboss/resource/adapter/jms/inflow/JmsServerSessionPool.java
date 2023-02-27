@@ -23,13 +23,13 @@ package org.jboss.resource.adapter.jms.inflow;
 
 import java.util.ArrayList;
 
-import javax.jms.Connection;
-import javax.jms.ConnectionConsumer;
-import javax.jms.JMSException;
-import javax.jms.Queue;
-import javax.jms.ServerSession;
-import javax.jms.ServerSessionPool;
-import javax.jms.Topic;
+import jakarta.jms.Connection;
+import jakarta.jms.ConnectionConsumer;
+import jakarta.jms.JMSException;
+import jakarta.jms.Queue;
+import jakarta.jms.ServerSession;
+import jakarta.jms.ServerSessionPool;
+import jakarta.jms.Topic;
 
 import org.jboss.logging.Logger;
 

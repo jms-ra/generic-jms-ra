@@ -21,8 +21,8 @@
  */
 package org.jboss.resource.adapter.jms;
 
-import javax.jms.BytesMessage;
-import javax.jms.JMSException;
+import jakarta.jms.BytesMessage;
+import jakarta.jms.JMSException;
 
 /**
  * A wrapper for a message

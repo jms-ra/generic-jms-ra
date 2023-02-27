@@ -1,12 +1,12 @@
-# Generic JMS JCA Resource Adapter for JBoss AS
+# Generic JMS JCA Resource Adapter for WildFly
 
-This project is for the Generic JMS JCA Resource Adapter for JBoss AS.  As the name suggests, this JCA RA provides the ability to integrate with any JMS broker which allows remote clients to look-up connection factories and destinations via JNDI (as outlined in section 4.2 of [the JMS 1.1 specification](http://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CDEQFjAA&url=http%3A%2F%2Fdownload.oracle.com%2Fotn-pub%2Fjcp%2F7195-jms-1.1-fr-spec-oth-JSpec%2Fjms-1_1-fr-spec.pdf&ei=psavUKuZDaSy2wWZ54D4Cw&usg=AFQjCNGCh-3NatP_ezkZ6MSgeahTmUuyZg)).  It currently is only verified to work in JBoss AS7 and supports, for example, consuming messages with an MDB and sending messages with a JCA-base JMS connection factory to 3rd-party brokers.  It is based on the generic JMS JCA RA found in previous versions of JBoss AS (e.g. 4, 5, and 6).  However, unlike those versions this is a stand-alone project now and no longer supports internal dead-letter processing since every modern JMS broker supports this already.
+This project is for the Generic Jakarta Messaging Service JCA Resource Adapter for WildFly.  As the name suggests, this JCA RA provides the ability to integrate with any Jakarta Messaging Service broker which allows remote clients to look-up connection factories and destinations via JNDI (as outlined in section 4.2 of [the JMS 1.1 specification](http://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CDEQFjAA&url=http%3A%2F%2Fdownload.oracle.com%2Fotn-pub%2Fjcp%2F7195-jms-1.1-fr-spec-oth-JSpec%2Fjms-1_1-fr-spec.pdf&ei=psavUKuZDaSy2wWZ54D4Cw&usg=AFQjCNGCh-3NatP_ezkZ6MSgeahTmUuyZg)).  It currently is only verified to work in WildFly and supports, for example, consuming messages with an MDB and sending messages with a JCA-base Jakarta Messaging Service connection factory to 3rd-party brokers.  It is based on the generic JMS JCA RA found in previous versions of JBoss AS (e.g. 4, 5, 6 and 7).  However, unlike those versions this is a stand-alone project now and no longer supports internal dead-letter processing since every modern JMS broker supports this already.
 
-To be clear, the Generic JMS JCA Resource Adapter for JBoss AS should only be used if the JMS provider with which you are integrating does not have a JCA Resource Adapter of its own.  Most enterprise JMS providers have their own JCA RA, but for whatever reason there are still a few who are lacking this essential integration component.
+To be clear, the Generic Jakarta Messaging Service JCA Resource Adapter for WildFly should only be used if the Jakarta Messaging Service provider with which you are integrating does not have a JCA Resource Adapter of its own.  Most enterprise Jakarta Messaging Service providers have their own JCA RA, but for whatever reason there are still a few who are lacking this essential integration component.
 
 ## Get Help
 
-Any questions, etc. can be posted on the ["Generic JMS JCA Resource Adapter for JBoss AS" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/jboss-generic-jms-ra).
+Any questions, etc. can be posted on the ["Generic Jakarta Messaging Service JCA Resource Adapter for WildFly" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/jboss-generic-jms-ra).
 
 **Note:** this is a *community* project and has no official support from Red Hat in any capacity.  I will certainly work with the community to address any issues, but I cannot guarantee any particular [SLA](http://en.wikipedia.org/wiki/Service-level_agreement).
 
@@ -16,7 +16,7 @@ The project consists of three Maven modules:
 
 - The parent module
  - The "generic-jms-ra-jar" module to create the library which goes inside the RAR.
- - The "generic-jms-ra-rar" module to create the actual resource adapter archive which is deployed within the Java EE application server (e.g. JBoss AS7).
+ - The "generic-jms-ra-rar" module to create the actual resource adapter archive which is deployed within the Jakarta EE application server (e.g. WildFly).
 
 FYI - Pre-built versions of the resource adapter archive used to be available in the [downloads section](https://github.com/jms-ra/generic-jms-ra/downloads), but [GitHub has deprecated this feature](https://github.com/blog/1302-goodbye-uploads).
 
@@ -26,16 +26,12 @@ FYI - Pre-built versions of the resource adapter archive used to be available in
 2. Execute 'mvn install' to build the code.
 3. Execute 'mvn -Prelease install' to generate the deployable resource adapter.
 
-## Release Notes
-
-* **1.0.BETA**: The initial release. Basically a raw copy of the generic JMS JCA RA from the old JBoss AS code-base. Minimal code clean-up and refactoring done. The main change was eliminating the dependency on org.jboss.jms.jndi.JMSProviderAdapter.
-* **1.0.RC1**: Refactored code style.  Refactored activation configuration properties to simplify and eliminate legacy code.  Refactored transaction handling so simplify and eliminate legacy code (hacks) where JMS transactions were used alongside JTA transactions to "fake" real XA semantics.
 
 ## Transaction Support
 
 JTA transactions are very commonly used with MDBs since it is easy to treat a JMS message as a unit of work which should be performed atomically.  For example, an MDB might consume a message, update a table in one or more databases, and then send another JMS message.  In this kind of use-case it's extremely common to require all this work be done atomically so that if any individual part fails then the whole unit of work fails which then usually re-delivers the original message or moves it to a DLQ of some kind.
 
-To enable this behavior an MDB needs to be configured appropriately.  For example, it would need these annotations ( **Note:** these are added by default in JBoss AS7 and every other Java EE 6 compliant application server):
+To enable this behavior an MDB needs to be configured appropriately.  For example, it would need these annotations ( **Note:** these are added by default in WildFly and every other Jakarta EE 10 compliant application server):
 
     @TransactionManagement(TransactionManagementType.CONTAINER)
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -55,16 +51,16 @@ Or perhaps:
 
 Otherwise an exception will be thrown and the MDB will not deploy.
 
-## JBoss AS7 Deployment Notes
+## WildFly Deployment Notes
 
-Since this is a <em>generic</em> JMS JCA RA, the user must supply it with the proper client classes to actually make a physical connection to a 3rd party JMS broker.  Since AS7 uses a modular classload this requires the user to:
+Since this is a <em>generic</em> Jakarta Messaging Service JCA RA, the user must supply it with the proper client classes to actually make a physical connection to a 3rd party Jakarta Messaging Service broker. Since WildFly uses a modular classload this requires the user to:
 
 1. Create a module with the proper integration classes 
 2. Modify the manifest.mf of the RAR to use the aforementioned module
 
 If you don't want to use the @ResourceAdapter annotation on your EJB3 MDB(s) then you can change the default resource adapter which all MDBs in the system will use:
 
-	<subsystem xmlns="urn:jboss:domain:ejb3:1.2">
+	<subsystem xmlns="urn:jboss:domain:ejb3:10.0">
 	    ... 
 	    <mdb>
 	        <resource-adapter-ref resource-adapter-name="generic-jms-rar.rar"/>
@@ -73,46 +69,12 @@ If you don't want to use the @ResourceAdapter annotation on your EJB3 MDB(s) the
 	    ...
 	</subsystem>
 
-## JBoss Messaging Integration
 
-For example, to integrate with JBoss Messaging running in JBoss AS 5 create a module.xml like this (jar files copied from &lt;JBOSS_5_HOME&gt;/client):
-
-	<module xmlns="urn:jboss:module:1.1" name="org.jboss.jboss-5-client">
-	    <resources>
-	        <resource-root path="concurrent.jar"/>
-	        <resource-root path="javassist.jar"/>
-	        <resource-root path="jboss-aop-client.jar"/>
-	        <resource-root path="jboss-common-core.jar"/>
-	        <resource-root path="jboss-logging-log4j.jar"/>
-	        <resource-root path="jboss-logging-spi.jar"/>
-	        <resource-root path="jboss-mdr.jar"/>
-	        <resource-root path="jboss-messaging-client.jar"/>
-	        <resource-root path="jboss-remoting.jar"/>
-	        <resource-root path="jboss-serialization.jar"/>
-	        <resource-root path="jnp-client.jar"/>
-	        <resource-root path="log4j.jar"/>
-	        <resource-root path="trove.jar"/>
-	    </resources>
-
-	    <dependencies>
-	        <module name="javax.api"/>
-	        <module name="javax.jms.api"/>
-	    </dependencies>
-	</module>
-
-Note the "name" of the &lt;module&gt; - "org.jboss.jboss-5-client".  This name must match the path of the module in &lt;JBOSS_7_HOME&gt;/modules, therefore all the related jar files would need to be placed in &lt;JBOSS_7_HOME&gt;/modules/org/jboss/jboss-5-client/main.
-
-The next step is to modify the generic JMS JCA RA to use this module so it has access to all the proper integration classes when it interacts with the remote JBoss Messaging broker.  To do this, simply add this line to the generic-jms-rar.rar/META-INF/manifest.mf:
-
-	Dependencies: org.jboss.jboss-5-client
-
-Once the proper dependencies have been configured for the RAR, copy it to the "deployments" directory (e.g. &lt;JBOSS_HOME&gt;/standalone/deployments).
-
-### Example AS7 deployment descriptor for an outbound connector
+### Example WildFLy deployment descriptor for an outbound connector
 
 To create an outbound connection factory, use a deployment descriptor like this in your standalone*.xml.
 
-	<subsystem xmlns="urn:jboss:domain:resource-adapters:1.0">
+	<subsystem xmlns="urn:jboss:domain:resource-adapters:6.0">
 	    <resource-adapters>
 	        <resource-adapter>
 	            <archive>
@@ -155,15 +117,15 @@ Once a message is received the MDB will use the "java:/GenericJmsXA" connection 
 
 The consumption and production will be done atomically because the underlying connection factories used to consume and produce the messages support XA and also because the way the MDB is coded to rollback the transaction when production fails for any reason.
 
-	import javax.ejb.ActivationConfigProperty;
-	import javax.ejb.MessageDriven;
-	import javax.jms.Connection;
-	import javax.jms.ConnectionFactory;
-	import javax.jms.Destination;
-	import javax.jms.Message;
-	import javax.jms.MessageListener;
-	import javax.jms.MessageProducer;
-	import javax.jms.Session;
+	import jakarta.ejb.ActivationConfigProperty;
+	import jakarta.ejb.MessageDriven;
+	import jakarta.jms.Connection;
+	import jakarta.jms.ConnectionFactory;
+	import jakarta.jms.Destination;
+	import jakarta.jms.Message;
+	import jakarta.jms.MessageListener;
+	import jakarta.jms.MessageProducer;
+	import jakarta.jms.Session;
 	import javax.naming.Context;
 	import javax.naming.InitialContext;
 	
@@ -280,8 +242,8 @@ This information was provided by community members as I don't have access to a T
 	        <resource-root path="tibjmsufo.jar"></resource-root>
 	    </resources>
 	    <dependencies>
-	        <module name="javax.api"/>
-	        <module name="javax.jms.api"/>
+	        <module name="jakarta.api"/>
+	        <module name="javjakartaax.jms.api"/>
 	    </dependencies>
 	</module>
 
@@ -294,8 +256,8 @@ This information was provided by community members as I don't have access to a T
             <resource-root path="tibcrypt.jar"/>
         </resources>
         <dependencies>
-            <module name="javax.api"/>
-            <module name="javax.jms.api"/>
+            <module name="jakarta.api"/>
+            <module name="jakarta.jms.api"/>
         </dependencies>
     </module>
 

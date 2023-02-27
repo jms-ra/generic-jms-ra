@@ -23,22 +23,22 @@ package org.jboss.resource.adapter.jms.inflow;
 
 import org.jboss.logging.Logger;
 
-import javax.jms.Connection;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.ServerSession;
-import javax.jms.Session;
-import javax.jms.XAConnection;
-import javax.jms.XASession;
-import javax.resource.spi.endpoint.MessageEndpoint;
-import javax.resource.spi.endpoint.MessageEndpointFactory;
-import javax.resource.spi.work.Work;
-import javax.resource.spi.work.WorkEvent;
-import javax.resource.spi.work.WorkException;
-import javax.resource.spi.work.WorkListener;
-import javax.resource.spi.work.WorkManager;
-import javax.transaction.TransactionManager;
+import jakarta.jms.Connection;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.MessageListener;
+import jakarta.jms.ServerSession;
+import jakarta.jms.Session;
+import jakarta.jms.XAConnection;
+import jakarta.jms.XASession;
+import jakarta.resource.spi.endpoint.MessageEndpoint;
+import jakarta.resource.spi.endpoint.MessageEndpointFactory;
+import jakarta.resource.spi.work.Work;
+import jakarta.resource.spi.work.WorkEvent;
+import jakarta.resource.spi.work.WorkException;
+import jakarta.resource.spi.work.WorkListener;
+import jakarta.resource.spi.work.WorkManager;
+import jakarta.transaction.TransactionManager;
 import javax.transaction.xa.XAResource;
 
 /**
@@ -102,7 +102,7 @@ public class JmsServerSession implements ServerSession, MessageListener, Work, W
         // Create the session
         if (activation.isDeliveryTransacted) {
             if (connection instanceof XAConnection) {
-                log.debug("Delivery is transacted, and client JMS implementation properly implements javax.jms.XAConnection.");
+                log.debug("Delivery is transacted, and client JMS implementation properly implements jakarta.jms.XAConnection.");
                 xaSession = ((XAConnection) connection).createXASession();
                 session = xaSession.getSession();
                 xaResource = xaSession.getXAResource();
