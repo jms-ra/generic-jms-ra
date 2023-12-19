@@ -17,6 +17,14 @@
     <packaging>rar</packaging>
     <name>JBoss Generic JMS RA RAR</name>
 
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://repository.jboss.org/licenses/apache-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <dependencies>
         <dependency>
             <groupId>org.jboss.genericjms</groupId>
@@ -24,14 +32,6 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
-    <licenses>
-        <license>
-            <name>lgpl</name>
-            <url>http://repository.jboss.org/licenses/lgpl-2.1.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
 
     <build>
         <plugins>
