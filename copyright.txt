@@ -1,8 +1,0 @@
-Adrian Brock <adrian@jboss.com>
-Jesper Pedersen <jesper.pedersen@jboss.org>
-Justin Bertram <jbertram@redhat.com>
-Weston Price <weston.price@jboss.com>
-Peter Antman <peter.antman@tim.se>
-Jason Dillon <jason@planet57.com>
-Norbert Lataille <Norbert.Lataille@m4x.org>
-Hiram Chirino <Norbert.Lataille@m4x.org>
