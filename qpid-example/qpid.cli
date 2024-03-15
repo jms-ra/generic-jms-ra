@@ -1,0 +1,17 @@
+ embed-server --admin-only=true --server-config=standalone-full.xml --std-out=echo
+ #Remove Artemis Broker
+ /subsystem=ee/service=default-bindings:write-attribute(name=jms-connection-factory, value=java\:\/jms\/qpid\/cf\/QpidBroker)
+ /subsystem=messaging-activemq/server=default:remove()
+ #To simplify our code configuration
+ /subsystem=ee:write-attribute(name=spec-descriptor-property-replacement, value=true)
+ /subsystem=ee:write-attribute(name=annotation-property-replacement, value=true)
+ /subsystem=ee:write-attribute(name=jboss-descriptor-property-replacement, value=true)
+ /subsystem=ee:write-attribute(name=jboss-descriptor-property-replacement, value=true)
+ #Create the external context to access Apache Qpid objects via JNDI
+ /subsystem=naming/binding=java\:global\/qpid:add(binding-type=external-context, class=javax.naming.InitialContext, module=org.jboss.genericjms.provider, environment={java.naming.factory.initial=org.apache.qpid.jms.jndi.JmsInitialContextFactory, queue.testQueue=testQueue, queue.outQueue=outQueue, connectionfactory.QpidBroker="amqp://localhost:5672?jms.username=admin&amp;jms.password=admin"})
+ /subsystem=naming/binding=java\:\/jms\/qpid\/queue\/testQueue:add(binding-type=lookup,lookup=java\:global\/qpid\/testQueue)
+ /subsystem=naming/binding=java\:\/jms\/qpid\/queue\/outQueue:add(binding-type=lookup, lookup=java\:global\/qpid\/outQueue)
+#Create and confiugre the Resource Adapter to connect to Apache Qpid
+ /subsystem=resource-adapters/resource-adapter=apache-qpid:add(module=org.jboss.genericjms, transaction-support=NoTransaction)
+ /subsystem=resource-adapters/resource-adapter=apache-qpid/connection-definitions=QPIDCF:add(jndi-name=java\:\/jms\/qpid\/cf\/QpidBroker, class-name=org.jboss.resource.adapter.jms.JmsManagedConnectionFactory)
+ /subsystem=resource-adapters/resource-adapter=apache-qpid/connection-definitions=QPIDCF/config-properties=JndiParameters:add(value="java.naming.factory.initial=org.apache.qpid.jms.jndi.JmsInitialContextFactory;connectionfactory.QpidBroker=amqp://localhost:5672?jms.username=admin&jms.password=admin")

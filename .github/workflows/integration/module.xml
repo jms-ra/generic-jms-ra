@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.8" name="org.jboss.genericjms.provider">
+    <resources>
+        <resource-root path="qpid-jms-client-2.5.0.jar"/>
+        <resource-root path="qpid-jms-discovery-2.5.0.jar"/>
+    </resources>
+    <dependencies>
+        <!-- To get access to the slf4j API -->
+        <module name="org.slf4j"/>
+        <module name="org.slf4j.impl"/>
+        <!-- To get access to the javax.naming API -->
+        <module name="javax.api"/>
+        <module name="jakarta.jms.api" export="true"/>
+        <module name="io.netty.netty-buffer"/>
+        <module name="io.netty.netty-codec"/>
+        <module name="io.netty.netty-codec-http"/>
+        <module name="io.netty.netty-common"/>
+        <module name="io.netty.netty-handler"/>
+        <module name="io.netty.netty-resolver"/>
+        <module name="io.netty.netty-transport"/>
+        <module name="io.netty.netty-transport-native-epoll"/>
+        <module name="io.netty.netty-transport-native-kqueue"/>
+        <module name="io.netty.netty-transport-native-unix-common"/>
+        <module name="org.apache.qpid.proton" />
+    </dependencies>
+</module>
+
