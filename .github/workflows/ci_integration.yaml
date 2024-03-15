@@ -1,0 +1,67 @@
+---
+name: Generic JMS RA for WildFly QPID Integration Test
+
+on:
+  - pull_request
+env:
+  WILDFLY_VERSION: 31.0.1.Final
+  GENERIC_RA_VERSION: 3.1.1-SNAPSHOT
+  WILDFLY_HOME: /home/runner/work/wildfly
+
+# Only run the latest job
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.ref || github.run_id }}'
+  cancel-in-progress: true
+jobs:
+  container-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Start Qpid
+        run: |
+          mkdir -p /home/runner/work/qpid-broker-j/work
+          cp -f /home/runner/work/generic-jms-ra/generic-jms-ra/.github/workflows/integration/work/*.* /home/runner/work/qpid-broker-j/work
+          docker run -d -p 5672:5672 -p 9080:8080 --name qpid -v /home/runner/work/qpid-broker-j/work:/qpid-broker-j/work quay.io/ehugonne/qpid-brokerj:9.2.0
+      - name: Set up JDK adopt 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+      - name: Build
+        run: |
+          mvn -ntp -U -B -fae clean install
+      - name: Build example
+        run: |
+          pushd qpid-example
+          mvn -ntp -U -B -fae clean install
+          popd
+      - name: Prepare WildFly
+        run: |
+          pushd /home/runner/work
+          ls -la
+          wget https://github.com/wildfly/wildfly/releases/download/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz
+          tar -xvzf wildfly-$WILDFLY_VERSION.tar.gz  && mv wildfly-$WILDFLY_VERSION wildfly
+          mkdir -p wildfly/modules/system/layers/base/org/jboss/genericjms/provider/main/.
+          cp -f /home/runner/work/generic-jms-ra/generic-jms-ra/.github/workflows/integration/*.* $WILDFLY_HOME/modules/system/layers/base/org/jboss/genericjms/provider/main/.
+          cp -f /home/runner/work/generic-jms-ra/generic-jms-ra/generic-jms-ra-jar/target/generic-jms-ra-jar-$GENERIC_RA_VERSION.jar $WILDFLY_HOME/modules/system/layers/base/org/jboss/genericjms/main/generic-jms-ra-jar-3.0.0.Final.jar
+          cp -f /home/runner/work/generic-jms-ra/generic-jms-ra/qpid-example/ejb/target/remote-mdb-ejb-1.0.0.jar $WILDFLY_HOME/standalone/deployments/remote-mdb-ejb.jar
+          $WILDFLY_HOME/bin/add-user.sh -a -u 'quickstartUser' -p 'quickstartPwd1!' 
+          $WILDFLY_HOME/bin/jboss-cli.sh --file=/home/runner/work/generic-jms-ra/generic-jms-ra/qpid-example/qpid.cli
+      - name: Start WildFly
+        run: |
+          $WILDFLY_HOME/bin/standalone.sh -c standalone-full.xml &
+      - name: Run client
+        run: |
+          pushd /home/runner/work/generic-jms-ra/generic-jms-ra/qpid-example/client
+          mvn "-Dexec.args=-classpath %classpath org.wildfly.jms.demo.qpid.client.HelloWorld" -Dexec.executable=java -Dexec.classpathScope=runtime org.codehaus.mojo:exec-maven-plugin:3.1.0:exec
+          popd
+      - name: Stop WildFly
+        run: |
+          $WILDFLY_HOME/bin/jboss-cli.sh -c --commands=shutdown
+      - name: Delete container 
+        run: |
+          docker stop qpid
+          docker rm qpid
+
+

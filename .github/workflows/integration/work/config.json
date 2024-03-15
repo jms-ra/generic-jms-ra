@@ -1,0 +1,102 @@
+{
+  "id" : "f3618bb8-c35e-4c53-86e7-7367cceac97e",
+  "name" : "${broker.name}",
+  "modelVersion" : "9.1",
+  "accesscontrolproviders" : [ {
+    "id" : "d1429171-5514-4134-81ab-f26c5a2e430a",
+    "name" : "brokerAcl",
+    "type" : "AclFile",
+    "path" : "/qpid-broker-j/work/broker.acl",
+    "lastUpdatedBy" : null,
+    "lastUpdatedTime" : null,
+    "createdBy" : null,
+    "createdTime" : null
+  } ],
+  "authenticationproviders" : [ {
+    "id" : "bb364823-dd51-4736-85c3-5e8e27acd0e6",
+    "name" : "plain",
+    "type" : "Plain",
+    "secureOnlyMechanisms" : [ ],
+    "users" : [ {
+      "id" : "e3dd60a9-25cd-4db1-8630-4779431be788",
+      "name" : "${QPID_ADMIN_USER}",
+      "type" : "managed",
+      "password" : "${QPID_ADMIN_PASSWORD}"
+    } ]
+  } ],
+  "brokerloggers" : [ {
+    "id" : "7c93c5f9-749f-40a1-97ca-9b4fb42e1a36",
+    "name" : "console",
+    "type" : "Console",
+    "brokerloginclusionrules" : [ {
+      "id" : "0295c43b-ad81-4bfd-9475-f6d0010b939d",
+      "name" : "Operational",
+      "type" : "NameAndLevel",
+      "level" : "INFO",
+      "loggerName" : "qpid.message.*"
+    }, {
+      "id" : "6863a269-bcd7-43ce-a8fc-354f2e67ecda",
+      "name" : "Qpid",
+      "type" : "NameAndLevel",
+      "level" : "INFO",
+      "loggerName" : "org.apache.qpid.*"
+    }, {
+      "id" : "e9f8575b-2fea-43bb-abc0-436a11ca48e6",
+      "name" : "Root",
+      "type" : "NameAndLevel",
+      "level" : "INFO",
+      "loggerName" : "ROOT"
+    }, {
+      "id" : "6cab31ad-f144-46d0-951a-61ee9dc4beb2",
+      "name" : "Statistics",
+      "type" : "NameAndLevel",
+      "level" : "INFO",
+      "loggerName" : "qpid.statistics.*"
+    } ]
+  } ],
+  "plugins" : [ {
+    "id" : "da5370a8-2e18-46c4-81ad-216c4a9c71ae",
+    "type" : "MANAGEMENT-HTTP",
+    "name" : "httpManagement",
+    "httpBasicAuthenticationEnabled" : true
+  } ],
+  "ports" : [ {
+    "id" : "be46835c-aec3-40cd-b251-c26a6ab3ffcc",
+    "name" : "AMQP",
+    "port" : "${qpid.amqp_port}",
+    "authenticationProvider" : "plain",
+    "virtualhostaliases" : [ {
+      "id" : "19100479-0280-4ffa-9ece-f6d3cc7b5043",
+      "name" : "defaultAlias",
+      "type" : "defaultAlias"
+    }, {
+      "id" : "f3457529-e889-4ff8-bb21-1929c2777500",
+      "name" : "hostnameAlias",
+      "type" : "hostnameAlias"
+    }, {
+      "id" : "7b4f6a5a-0bd8-4feb-852e-414f6d0ad962",
+      "name" : "nameAlias",
+      "type" : "nameAlias"
+    } ]
+  }, {
+    "id" : "a86caadc-6d47-4247-a8fb-669d49f52972",
+    "name" : "HTTP",
+    "port" : "${qpid.http_port}",
+    "authenticationProvider" : "plain",
+    "protocols" : [ "HTTP" ]
+  } ],
+  "virtualhostnodes" : [ {
+    "id" : "3bf4bec7-28b4-4cd2-85aa-3e3dcc709601",
+    "name" : "default",
+    "type" : "JSON",
+    "defaultVirtualHostNode" : "true",
+    "preferenceStoreAttributes" : {
+      "type" : "JSON",
+      "attributes" : {
+        "path" : "/qpid-broker-j/work"
+      }
+    },
+    "storePath" : "/qpid-broker-j/work",
+    "virtualHostInitialConfiguration" : "{}"
+  } ]
+}
